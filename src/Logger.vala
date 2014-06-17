@@ -1,8 +1,14 @@
 namespace Log4Vala {
 	public class Logger : Object {
-		internal static HashTable<string,Logger?> logger_cache = new HashTable<string,Logger?>( str_hash, str_equal );
+		internal static HashTable<string,Logger?> logger_cache;
 
+		/**
+		 * Name of the logger instance.
+		 */
 		public string name { get; set; }
+		/**
+		 * Current log level of this instance.
+		 */
 		public Level log_level { get; set; default = Level.TRACE; }
 
 		/**
@@ -12,6 +18,9 @@ namespace Log4Vala {
 		 * @param name Name of the logger. For example, "log4vala.logger".
 		 */
 		public static Logger get_logger( string name ) {
+			if ( logger_cache == null ) {
+				logger_cache = new HashTable<string,Logger?>( str_hash, str_equal );
+			}
 			if ( ! logger_cache.contains(name) ) {
 				// Config, etc
 				var logger = new Logger.with_name(name);
@@ -87,8 +96,26 @@ namespace Log4Vala {
 		 * @param e Optional Error object to log
 		 */
 		public void log( Level log_level, string message, Error? e = null ) {
+			if ( log_level < this.log_level ) {
+				return;
+			}
+
+			// create a logevent
+			var log_event = new LogEvent.with_message(
+				name,
+				log_level,
+				message,
+				e
+			);
+
+			// get a layout
+			log_event.layout = new Layout.SimpleLayout();
+			
+			// get an appender
+			var appender = new Appender.ScreenAppender();
+
 			// replace this
-			stdout.printf( "%s %s\n", log_level.to_string(), message );
+			appender.append(log_event);
 		}
 
 	}

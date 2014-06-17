@@ -1,10 +1,18 @@
 include(ValaPrecompile)
 
 vala_precompile(LOG4VALA_VALA_C 
+	Config.vala
 	Level.vala
+	LogEvent.vala
 	Logger.vala
+	LoggerConfig.vala
+	Appender/IAppender.vala
+	Appender/ScreenAppender.vala
+	Layout/ILayout.vala
+	Layout/SimpleLayout.vala
 PACKAGES
 	${DEFAULT_PACKAGES}
+	posix
 OPTIONS
 	${DEFAULT_VALA_OPTIONS}
 GENERATE_VAPI

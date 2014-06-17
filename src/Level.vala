@@ -14,6 +14,10 @@ namespace Log4Vala {
 		INFO,
 		WARN,
 		ERROR,
-		FATAL
+		FATAL;
+
+		public string friendly() {
+			return this.to_string().substring(16);
+		}
 	}
 }

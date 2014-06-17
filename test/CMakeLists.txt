@@ -11,6 +11,8 @@ vala_precompile(TLOG4VALA_VALA_C
 	AbstractTestCase.vala
 	TestRunner.vala
 	Level.test.vala
+	Logger.test.vala
+	Layout.SimpleLayout.test.vala
 PACKAGES
 	${TLOG4VALA_VALA_PACKAGES}
 	${PKGNAME}-${PKGVERSION}
