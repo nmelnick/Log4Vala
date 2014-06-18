@@ -10,6 +10,7 @@ SET( TLOG4VALA_VALA_PACKAGES
 vala_precompile(TLOG4VALA_VALA_C 
 	AbstractTestCase.vala
 	TestRunner.vala
+	Config.test.vala
 	Level.test.vala
 	Logger.test.vala
 	Layout.SimpleLayout.test.vala
