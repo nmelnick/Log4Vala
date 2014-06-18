@@ -10,6 +10,7 @@ namespace Log4Vala {
 
 		public HashTable<string,IAppender?> appenders = new HashTable<string,IAppender?>( str_hash, str_equal );
 		public HashTable<string,ILayout?> layouts = new HashTable<string,ILayout?>( str_hash, str_equal );
+		public HashTable<string,LoggerConfi?> loggers = new HashTable<string,ILayout?>( str_hash, str_equal );
 
 		/**
 		 * Default logging appender.
