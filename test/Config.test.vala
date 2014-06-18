@@ -1,10 +1,17 @@
 public class Log4ValaTest.Config : AbstractTestCase {
 	public Config() {
 		base("Config");
+		add_test( "singleton", singleton );
 		add_test( "get_appender_for_logger.exact", get_appender_for_logger_exact );
 		add_test( "get_appender_for_logger.historical", get_appender_for_logger_historical );
 		add_test( "get_layout_for_logger.exact", get_layout_for_logger_exact );
 		add_test( "get_layout_for_logger.historical", get_layout_for_logger_historical );
+	}
+
+	public void singleton() {
+		var config = Log4Vala.Config.get_config();
+		assert( config != null );
+		assert( config == Log4Vala.Config.get_config() );
 	}
 
 	public void get_appender_for_logger_exact() {
