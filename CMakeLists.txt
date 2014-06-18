@@ -39,6 +39,7 @@ SET( DEFAULT_PACKAGES
 	glib-2.0
 	gmodule-2.0
 	gobject-2.0
+	gio-2.0
 )
 find_package(PkgConfig)
 pkg_check_modules(CORE_DEPS REQUIRED ${DEFAULT_PACKAGES} glib-2.0>=2.32)

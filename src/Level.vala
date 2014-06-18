@@ -16,8 +16,26 @@ namespace Log4Vala {
 		ERROR,
 		FATAL;
 
+		/**
+		 * Retrieve friendly name for log level. For example, Level.TRACE would
+		 * return "TRACE".
+		 */
 		public string friendly() {
 			return this.to_string().substring(16);
+		}
+
+		/**
+		 * Retrieve Level value by string name. For example, "trace" would
+		 * return Level.TRACE.
+		 * @param name Name of value
+		 */
+		public static Level? get_by_name( string name ) {
+			var class = (EnumClass) typeof(Level).class_ref();
+			unowned EnumValue? eval = class.get_value_by_name( "LOG4_VALA_LEVEL_" + name.up() );
+			if ( eval != null ) {
+				return (Level) eval.value;
+			}
+			return null;
 		}
 	}
 }
