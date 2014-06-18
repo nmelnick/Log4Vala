@@ -32,10 +32,6 @@ namespace Log4Vala {
 		 * Error logged, if provided.
 		 */
 		public Error? error { get; set; }
-		/**
-		 * Appropriate layout for this event.
-		 */
-		public ILayout layout { get; set; }
 
 		public LogEvent() {}
 
@@ -61,14 +57,6 @@ namespace Log4Vala {
 			if ( Thread.supported() ) {
 				this.thread_id = (int64) Thread.self<int>();
 			}
-		}
-
-		/**
-		 * Render the current event as a string using the ILayout stored in
-		 * the layout property.
-		 */
-		public string render() {
-			return this.layout.format(this);
 		}
 	}
 }

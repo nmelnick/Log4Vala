@@ -1,11 +1,11 @@
 namespace Log4Vala {
 	public class LoggerConfig {
-		public string appender;
-		public string layout;
+		public string[] appenders;
+		public Level? level;
 
-		public LoggerConfig( string appender, string layout ) {
-			this.appender = appender;
-			this.layout = layout;
+		public LoggerConfig( string[] appenders, Level? level ) {
+			this.appenders = appenders;
+			this.level = level;
 		}
 	}
 }

@@ -34,7 +34,7 @@ namespace Log4Vala {
 		/**
 		 * Current log level of this instance.
 		 */
-		public Level log_level { get; set; default = Level.TRACE; }
+		public Level log_level { get; set; }
 
 		/**
 		 * Retrieve a Logger instance corresponding to the name of the logger.
@@ -48,6 +48,7 @@ namespace Log4Vala {
 			}
 			if ( ! logger_cache.contains(name) ) {
 				var logger = new Logger.with_name(name);
+				logger.log_level = Config.get_config().get_level_for_logger(name);
 				logger_cache.insert( name, logger );
 			}
 			return logger_cache.lookup(name);
@@ -132,13 +133,11 @@ namespace Log4Vala {
 				e
 			);
 
-			// get a layout
-			log_event.layout = Config.get_config().get_layout_for_logger(name);
-			
-			// get an appender
-			var appender = Config.get_config().get_appender_for_logger(name);
-
-			appender.append(log_event);
+			// get appenders
+			var appenders = Config.get_config().get_appenders_for_logger(name);
+			foreach ( var appender in appenders ) {
+				appender.append(log_event);
+			}
 		}
 
 	}
