@@ -109,12 +109,11 @@ namespace Log4Vala {
 			);
 
 			// get a layout
-			log_event.layout = new Layout.SimpleLayout();
+			log_event.layout = Config.get_config().get_layout_for_logger(name);
 			
 			// get an appender
-			var appender = new Appender.ScreenAppender();
+			var appender = Config.get_config().get_appender_for_logger(name);
 
-			// replace this
 			appender.append(log_event);
 		}
 
