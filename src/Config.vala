@@ -8,6 +8,9 @@ namespace Log4Vala {
 		public HashTable<string,ILayout?> layouts = new HashTable<string,ILayout?>( str_hash, str_equal );
 		public HashTable<string,LoggerConfig?> loggers = new HashTable<string,LoggerConfig?>( str_hash, str_equal );
 
+		public IAppender root_appender { get; set; }
+		public ILayout root_layout { get; set; }
+
 		public static Config get_config() {
 			if ( Config.instance == null ) {
 				Config.instance = new Config();
@@ -19,7 +22,10 @@ namespace Log4Vala {
 			instance = null;
 		}
 
-		internal Config() {}
+		internal Config() {
+			root_appender = new ScreenAppender();
+			root_layout = new SimpleLayout();
+		}
 
 		public IAppender? get_appender_for_logger( string name ) {
 			if ( appenders.contains(name) ) {
@@ -28,10 +34,27 @@ namespace Log4Vala {
 			string temp_name = null;
 			do {
 				temp_name = name.substring( 0, name.last_index_of(".") );
-				stdout.printf( "\n%s -> %s", name, temp_name );
 				name = temp_name;
+				if ( appenders.contains(name) ) {
+					return appenders.get(name);
+				}
 			} while ( name != temp_name );
-			return null;
+			return root_appender;
+		}
+
+		public ILayout? get_layout_for_logger( string name ) {
+			if ( layouts.contains(name) ) {
+				return layouts.get(name);
+			}
+			string temp_name = null;
+			do {
+				temp_name = name.substring( 0, name.last_index_of(".") );
+				name = temp_name;
+				if ( layouts.contains(name) ) {
+					return layouts.get(name);
+				}
+			} while ( name != temp_name );
+			return root_layout;
 		}
 	}
 }
