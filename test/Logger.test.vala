@@ -47,7 +47,7 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 
 public class TestAppender : Object,Log4Vala.Appender.IAppender {
 	public string name { get; set; default = "TestAppender"; }
-	public Log4Vala.Layout.ILayout layout { get; set; default = new Log4Vala.Layout.SimpleLayout(); }
+	public Log4Vala.Layout.ILayout? layout { get; set; default = new Log4Vala.Layout.SimpleLayout(); }
 	public string last_entry { get; set; }
 
 	public void append( Log4Vala.LogEvent event ) {

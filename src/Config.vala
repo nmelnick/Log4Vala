@@ -152,9 +152,61 @@ namespace Log4Vala {
 
 			switch( key_split[1] ) {
 				case "appender":
+					var appender_name = key_split[2];
+					if ( key_split.length > 3 && ! appenders.contains(appender_name) ) {
+						Logger.get_logger("log4vala.internal").error(
+							"Appender '%s' is being configured, but we do not know what it is yet: %s".printf( appender_name, line )
+						);
+						return;
+					}
+					if ( key_split.length == 3 ) {
+						// New appender
+						var type = Type.from_name( val.replace( ".", "" ) );
+						if ( type == 0 ) {
+							Logger.get_logger("log4vala.internal").error(
+								"Appender '%s' created with invalid Appender type '%s'".printf( appender_name, val )
+							);
+							return;
+						}
+						IAppender appender = (IAppender) Object.new(type);
+						appender.name = appender_name;
+						appenders.insert( appender_name, appender );
+					} else if ( key_split[3] == "layout" ) {
+						var appender = appenders.get(appender_name);
+						if ( key_split.length > 4 && appender.layout == null ) {
+							Logger.get_logger("log4vala.internal").error(
+								"Appender '%s' layout is being configured, but we do not know what it is yet: %s".printf( appender_name, line )
+							);
+							return;
+						}
+						if ( key_split.length == 4 ) {
+							// New layout
+							var type = Type.from_name( val.replace( ".", "" ) );
+							if ( type == 0 ) {
+								Logger.get_logger("log4vala.internal").error(
+									"Appender '%s' layout created with invalid type '%s'".printf( appender_name, val )
+								);
+								return;
+							}
+							ILayout layout = (ILayout) Object.new(type);
+							appender.layout = layout;
+						} else {
+							var layout = appender.layout;
+							var property = key_split[4].replace( "_", "-" );
+							layout.set_property( property, val );
+						}
+
+					} else {
+						var appender = appenders.get(appender_name);
+						var property = key_split[3].replace( "_", "-" );
+						if ( property == "name" || property == "append" ) {
+							return;
+						}
+						appender.set_property( property, val );
+					}
 					break;
 				case "logger":
-					var logger_name = line.substring(17);
+					var logger_name = key.substring(16);
 					if ( logger_name.length > 0 ) {
 						loggers.insert( logger_name, new LoggerConfig.from_config(val) );
 					} else {
@@ -175,6 +227,8 @@ namespace Log4Vala {
 
 		internal Config() {
 			set_defaults();
+			Type f = typeof(ScreenAppender);
+			f = typeof(SimpleLayout);
 		}
 
 		internal void set_defaults() {
