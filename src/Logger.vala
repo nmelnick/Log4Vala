@@ -1,4 +1,29 @@
 namespace Log4Vala {
+	/**
+	 * Core logging class for Log4Vala, used to retrieve logger instances and
+	 * perform logging within code.
+	 *
+	 * Usage:
+	 * {{{
+	 * // At the beginning of the application, or entry point for a library,
+	 * // initialize Log4Vala
+	 *
+	 * // Retrieve a logger at the beginning of a module or class. The
+	 * // get_logger call will always return the same object, but it might be
+	 * // useful to store it in a private variable if it's class-wide.
+	 * Logger logger = Log4Vala.Logger.get_logger("my.class.name");
+	 *
+	 * // Log a message
+	 * logger.warn("Oh no, there's something off!");
+	 *
+	 * // Log an error
+	 * try {
+	 *     something_that_will_throw();
+	 * } catch (Error e) {
+	 *     logger.error( "Something threw!", e );
+	 * }
+	 * }}}
+	 */
 	public class Logger : Object {
 		internal static HashTable<string,Logger?> logger_cache;
 
@@ -22,7 +47,6 @@ namespace Log4Vala {
 				logger_cache = new HashTable<string,Logger?>( str_hash, str_equal );
 			}
 			if ( ! logger_cache.contains(name) ) {
-				// Config, etc
 				var logger = new Logger.with_name(name);
 				logger_cache.insert( name, logger );
 			}

@@ -5,7 +5,6 @@ vala_precompile(LOG4VALA_VALA_C
 	Level.vala
 	LogEvent.vala
 	Logger.vala
-	LoggerConfig.vala
 	Appender/IAppender.vala
 	Appender/ScreenAppender.vala
 	Layout/ILayout.vala
