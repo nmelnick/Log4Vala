@@ -15,6 +15,7 @@ vala_precompile(TLOG4VALA_VALA_C
 	Logger.test.vala
 	LoggerConfig.test.vala
 	Layout.SimpleLayout.test.vala
+	Layout.PatternLayout.test.vala
 PACKAGES
 	${TLOG4VALA_VALA_PACKAGES}
 	${PKGNAME}-${PKGVERSION}

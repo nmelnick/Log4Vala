@@ -1,4 +1,13 @@
 namespace Log4Vala.Layout {
+	/**
+	 * SimpleLayout provides most of the items needed for a log entry, and is
+	 * the default layout.
+	 *
+	 * Example:
+	 * {{{
+	 * 2014-01-01 15:31:48 WARN  example.class.foo This is a message!
+	 * }}}
+	 */
 	public class SimpleLayout : Object,ILayout {
 		public static const string error_format = " | Error: Code %d, Domain %" + uint32.FORMAT + ", Message: %s";
 		public string header { get; set; }

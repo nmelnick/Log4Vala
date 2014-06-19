@@ -12,6 +12,7 @@ vala_precompile(LOG4VALA_VALA_C
 	Appender/FileAppender.vala
 	Layout/ILayout.vala
 	Layout/SimpleLayout.vala
+	Layout/PatternLayout.vala
 PACKAGES
 	${DEFAULT_PACKAGES}
 	posix
