@@ -7,6 +7,7 @@ namespace Log4Vala {
 	 * {{{
 	 * // At the beginning of the application, or entry point for a library,
 	 * // initialize Log4Vala
+	 * Log4Perl.init("/path/to/log4vala.conf");
 	 *
 	 * // Retrieve a logger at the beginning of a module or class. The
 	 * // get_logger call will always return the same object, but it might be

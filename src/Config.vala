@@ -217,8 +217,8 @@ namespace Log4Vala {
 					}
 					break;
 				case "logger":
-					var logger_name = key.substring(16);
-					if ( logger_name.length > 0 ) {
+					if ( key.length > 16 ) {
+						var logger_name = key.substring(16);
 						loggers.insert( logger_name, new LoggerConfig.from_config(val) );
 					} else {
 						root_appender_description = val;
@@ -252,13 +252,13 @@ namespace Log4Vala {
 			loggers = new HashTable<string,LoggerConfig?>( str_hash, str_equal );
 		}
 
-		internal void init( string config_file ) {
+		internal static void init( string config_file ) {
 			instance = new Config();
 			instance.config_file = config_file;
-			parse_config();
+			instance.parse_config();
 		}
 
-		internal void init_and_watch( string config_file, int interval ) {
+		internal static void init_and_watch( string config_file, int interval ) {
 			init(config_file);
 			instance.watch_config(interval);
 		}

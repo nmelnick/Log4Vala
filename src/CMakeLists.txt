@@ -2,6 +2,7 @@ include(ValaPrecompile)
 
 vala_precompile(LOG4VALA_VALA_C 
 	Config.vala
+	Core.vala
 	Level.vala
 	LogEvent.vala
 	Logger.vala

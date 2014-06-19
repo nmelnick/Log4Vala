@@ -10,7 +10,6 @@ public class Log4ValaTest.Config : AbstractTestCase {
 		add_test( "parse_config_line_init_logger", parse_config_line_init_logger );
 		add_test( "parse_config_line_init_appender_layout", parse_config_line_init_appender_layout );
 		add_test( "parse_config_line_init_appender_layout_property", parse_config_line_init_appender_layout_property );
-
 	}
 
 	public void singleton() {
