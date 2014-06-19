@@ -295,13 +295,15 @@ namespace Log4Vala {
 			loggers = new HashTable<string,LoggerConfig?>( str_hash, str_equal );
 		}
 
-		internal static void init( string config_file ) {
+		internal static void init( string? config_file ) {
 			instance = new Config();
 			instance.config_file = config_file;
-			instance.parse_config();
+			if ( instance.config_file != null ) {
+				instance.parse_config();
+			}
 		}
 
-		internal static void init_and_watch( string config_file, int interval ) {
+		internal static void init_and_watch( string? config_file, int interval ) {
 			init(config_file);
 			instance.watch_config(interval);
 		}

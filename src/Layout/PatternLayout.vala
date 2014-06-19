@@ -143,9 +143,11 @@ namespace Log4Vala.Layout {
 										}
 										erp++;
 									}
-									sb.append(
-										pattern_sb.str.printf( er_substring.str )
-									);
+									if ( event.error != null ) {
+										sb.append(
+											pattern_sb.str.printf( er_substring.str )
+										);
+									}
 									break;
 								case 't':
 									pattern_sb.append("ld");
