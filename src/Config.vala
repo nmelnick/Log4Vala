@@ -11,8 +11,8 @@ namespace Log4Vala {
 		private FileMonitor monitor;
 		private string root_appender_description;
 
-		public HashTable<string,IAppender?> appenders = new HashTable<string,IAppender?>( str_hash, str_equal );
-		public HashTable<string,LoggerConfig?> loggers = new HashTable<string,LoggerConfig?>( str_hash, str_equal );
+		internal HashTable<string,IAppender?> appenders = new HashTable<string,IAppender?>( str_hash, str_equal );
+		internal HashTable<string,LoggerConfig?> loggers = new HashTable<string,LoggerConfig?>( str_hash, str_equal );
 
 		/**
 		 * Default logging appender.
@@ -35,6 +35,48 @@ namespace Log4Vala {
 				Config.instance = new Config();
 			}
 			return Config.instance;
+		}
+
+		/**
+		 * Add an appender manually, with the referenced appender name and an
+		 * instance of a new, pre-configured appender.
+		 * @param appender_name Unique name to refer to this appender
+		 * @param appender Instance of an appender
+		 */
+		public void add_appender( string appender_name, IAppender appender ) {
+			appenders.insert( appender_name, appender );
+		}
+
+		/**
+		 * Remove an appender manually. If the appender does not already exist,
+		 * nothing happens.
+		 * @param appender_name Unique appender to remove
+		 */
+		public void remove_appender( string appender_name ) {
+			if ( appenders.contains(appender_name) ) {
+				appenders.remove(appender_name);
+			}
+		}
+
+		/**
+		 * Add a logger manually, with the name of a logger, and the configured
+		 * appender(s) and log level as a LoggerConfig object.
+		 * @param logger_name Unique name for a logger
+		 * @param config LoggerConfig instance
+		 */
+		public void add_logger( string logger_name, LoggerConfig config ) {
+			loggers.insert( logger_name, config );
+		}
+
+		/**
+		 * Remove a logger manually. If the logger does not already exist,
+		 * nothing happens.
+		 * @param logger_name Unique appender to remove
+		 */
+		public void remove_logger( string logger_name ) {
+			if ( loggers.contains(logger_name) ) {
+				loggers.remove(logger_name);
+			}
 		}
 
 		/**
@@ -181,7 +223,7 @@ namespace Log4Vala {
 						}
 						IAppender appender = (IAppender) Object.new(type);
 						appender.name = appender_name;
-						appenders.insert( appender_name, appender );
+						add_appender( appender_name, appender );
 					} else if ( key_split[3] == "layout" ) {
 						var appender = appenders.get(appender_name);
 						if ( key_split.length > 4 && appender.layout == null ) {
@@ -219,7 +261,7 @@ namespace Log4Vala {
 				case "logger":
 					if ( key.length > 16 ) {
 						var logger_name = key.substring(16);
-						loggers.insert( logger_name, new LoggerConfig.from_config(val) );
+						add_logger( logger_name, new LoggerConfig.from_config(val) );
 					} else {
 						root_appender_description = val;
 					}
