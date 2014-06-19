@@ -9,6 +9,7 @@ namespace Log4Vala {
 		private static Config? instance;
 
 		private FileMonitor monitor;
+		private string root_appender_description;
 
 		public HashTable<string,IAppender?> appenders = new HashTable<string,IAppender?>( str_hash, str_equal );
 		public HashTable<string,LoggerConfig?> loggers = new HashTable<string,LoggerConfig?>( str_hash, str_equal );
@@ -120,6 +121,16 @@ namespace Log4Vala {
 					e
 				);
 			}
+
+			if ( root_appender_description != null ) {
+				var config = new LoggerConfig.from_config(root_appender_description);
+				if ( config.appenders != null && config.appenders[0] != null ) {
+					root_appender = appenders.get( config.appenders[0] );
+				}
+				if ( config.level != null ) {
+					root_level = config.level;
+				}
+			}
 		}
 
 		public void parse_config_line( ref string line_to_parse ) {
@@ -210,7 +221,7 @@ namespace Log4Vala {
 					if ( logger_name.length > 0 ) {
 						loggers.insert( logger_name, new LoggerConfig.from_config(val) );
 					} else {
-						// figure out root appender
+						root_appender_description = val;
 					}
 					break;
 				default:
@@ -228,6 +239,7 @@ namespace Log4Vala {
 		internal Config() {
 			set_defaults();
 			Type f = typeof(ScreenAppender);
+			f = typeof(FileAppender);
 			f = typeof(SimpleLayout);
 		}
 
