@@ -51,6 +51,7 @@ namespace Log4Vala {
 				var logger = new Logger.with_name(name);
 				logger.log_level = Config.get_config().get_level_for_logger(name);
 				logger_cache.insert( name, logger );
+				return logger;
 			}
 			return logger_cache.lookup(name);
 		}
