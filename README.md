@@ -89,7 +89,13 @@ or overwrite that file.
 
 ### Layouts
 
-* *SimpleLayout* is the default layout, and looks something like this:
+* *SimpleLayout* is the default layout, with just the log level and the message,
+and looks something like this:
+```
+WARN - This is a message!
+```
+* *DescriptiveLayout* includes most of the information one would need in a log,
+and looks like this:
 ```
 2014-01-01 15:31:48 WARN  example.class.foo This is a message!
 ```
@@ -102,6 +108,7 @@ pattern, similar to a printf, and each log message will output that way. The opt
  | %c     | The category or logger name |
  | %d     | The date. The date format character may be followed by a date format specifier enclosed between braces. For example, %d{%H:%M:%S,%l}. If no date format specifier is given, then the following format is used: "2014-06-18T09:56:21Z". The date format specifier admits the same syntax as the ANSI C function strftime, with 1 addition. The addition is the specifier %l for milliseconds, padded with zeros to make 3 digits. |
  | %m     | The message |
+ | %n     | A line feed |
  | %p     | The priority or log level |
  | %R     | Seconds since Jan 1, 1970 or epoch |
  | %E     | The error. The error format character may be followed by additional formatting in braces, where %Ec is the error code, %Ed is the domain, and %Em is the message. If no specifier is given, then the following format is used: "%Ec, %Ed, %Em". |

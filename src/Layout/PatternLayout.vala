@@ -9,7 +9,11 @@ namespace Log4Vala.Layout {
 		/**
 		 * Pattern to match the SimpleLayout.
 		 */
-		public static const string SIMPLE_PATTERN = "%d{%Y-%m-%d %H:%M:%S} %5p %c %m %E{ | Error: Code %Ec, Domain %Ed, Message: %Em}";
+		public static const string SIMPLE_PATTERN = "%p - %m";
+		/**
+		 * Pattern to match the DescriptiveLayout.
+		 */
+		public static const string DESCRIPTIVE_PATTERN = "%d{%Y-%m-%d %H:%M:%S} %5p %c %m %E{ | Error: Code %Ec, Domain %Ed, Message: %Em}";
 
 		public string header { get; set; }
 		public string footer { get; set; }
@@ -22,6 +26,7 @@ namespace Log4Vala.Layout {
 		 * || %c     || The category or logger name ||
 		 * || %d     || The date. The date format character may be followed by a date format specifier enclosed between braces. For example, %d{%H:%M:%S,%l}. If no date format specifier is given, then the following format is used: "2014-06-18T09:56:21Z". The date format specifier admits the same syntax as the ANSI C function strftime, with 1 addition. The addition is the specifier %l for milliseconds, padded with zeros to make 3 digits. ||
 		 * || %m     || The message ||
+		 * || %n     || A line feed ||
 		 * || %p     || The priority or log level ||
 		 * || %R     || Seconds since Jan 1, 1970 or epoch ||
 		 * || %E     || The error. The error format character may be followed by additional formatting in braces, where %Ec is the error code, %Ed is the domain, and %Em is the message. If no specifier is given, then the following format is used: "%Ec, %Ed, %Em". ||
@@ -65,6 +70,11 @@ namespace Log4Vala.Layout {
 								case 'm':
 									pattern_sb.append("s");
 									sb.append( pattern_sb.str.printf( event.message ) );
+									in_pattern = false;
+									break;
+								case 'n':
+									pattern_sb.append("s");
+									sb.append( pattern_sb.str.printf( "\n" ) );
 									in_pattern = false;
 									break;
 								case 'p':

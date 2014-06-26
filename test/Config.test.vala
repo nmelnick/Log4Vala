@@ -65,6 +65,7 @@ public class Log4ValaTest.Config : AbstractTestCase {
 		assert( config.appenders.contains("foo") );
 		assert( config.appenders.get("foo").name == "foo" );
 		assert( config.appenders.get("foo") is Log4Vala.Appender.ScreenAppender );
+		assert( config.appenders.get("foo").layout is Log4Vala.Layout.SimpleLayout );
 		Log4Vala.Config.reset_config();
 	}
 
@@ -85,10 +86,10 @@ public class Log4ValaTest.Config : AbstractTestCase {
 		string config_line = "log4vala.appender.foo = Log4Vala.Appender.ScreenAppender";
 		config.parse_config_line( ref config_line );
 		assert( config.appenders.size() == 1 );
-		config_line = "log4vala.appender.foo.layout = Log4Vala.Layout.SimpleLayout";
+		config_line = "log4vala.appender.foo.layout = Log4Vala.Layout.DescriptiveLayout";
 		config.parse_config_line( ref config_line );
 		assert( config.appenders.get("foo").layout != null );
-		assert( config.appenders.get("foo").layout is Log4Vala.Layout.SimpleLayout );
+		assert( config.appenders.get("foo").layout is Log4Vala.Layout.DescriptiveLayout );
 		Log4Vala.Config.reset_config();
 	}
 

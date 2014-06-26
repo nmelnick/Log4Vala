@@ -58,7 +58,8 @@ public class Log4ValaTest.Layout.PatternLayout : AbstractTestCase {
 				"a test message"
 			);
 			event.error = e;
-			assert( layout.format(event) == "2, 99, An error!" );
+			assert( layout.format(event).has_prefix("2, ") );
+			assert( layout.format(event).has_suffix(", An error!" ) );
 		}
 	}
 
@@ -74,7 +75,8 @@ public class Log4ValaTest.Layout.PatternLayout : AbstractTestCase {
 				"a test message"
 			);
 			event.error = e;
-			assert( layout.format(event) == "2 99 An error!" );
+			assert( layout.format(event).has_prefix("2 ") );
+			assert( layout.format(event).has_suffix(" An error!" ) );
 		}
 	}
 

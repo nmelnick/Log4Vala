@@ -223,6 +223,8 @@ namespace Log4Vala {
 						}
 						IAppender appender = (IAppender) Object.new(type);
 						appender.name = appender_name;
+						// Default layout is Simple
+						appender.layout = new SimpleLayout();
 						add_appender( appender_name, appender );
 					} else if ( key_split[3] == "layout" ) {
 						var appender = appenders.get(appender_name);
@@ -282,8 +284,9 @@ namespace Log4Vala {
 			set_defaults();
 			Type f = typeof(ScreenAppender);
 			f = typeof(FileAppender);
-			f = typeof(SimpleLayout);
+			f = typeof(DescriptiveLayout);
 			f = typeof(PatternLayout);
+			f = typeof(SimpleLayout);
 		}
 
 		internal void set_defaults() {
