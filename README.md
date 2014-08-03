@@ -77,6 +77,7 @@ public void a_method() {
 	// You may also call "log" with a log level.
 	logger.log_async.begin( Log4Vala.Level.INFO, "I am in a method!" );
 }
+```
 
 The Log4Vala in front of each call can be skipped with a ```using Log4Vala;``` at
 the beginning of your vala file.
@@ -169,13 +170,13 @@ a format similar to ```[2014-01-01 15:01:38] WARN  test.class : A message```,
 but only at ERROR or above.
 
 ```
-log4perl.logger=ERROR, LOGFILE
+log4vala.logger=ERROR, LOGFILE
     
-log4perl.appender.LOGFILE=Log4Vala.Appender.FileAppender
-log4perl.appender.LOGFILE.filename=/tmp/example.log
-log4perl.appender.LOGFILE.mode=append
-log4perl.appender.LOGFILE.layout=Log4Vala.Layout.PatternLayout
-log4perl.appender.LOGFILE.layout.pattern=%d{%Y-%m-%d %H:%M:%S} %5p %c : %m
+log4vala.appender.LOGFILE=Log4Vala.Appender.FileAppender
+log4vala.appender.LOGFILE.filename=/tmp/example.log
+log4vala.appender.LOGFILE.mode=append
+log4vala.appender.LOGFILE.layout=Log4Vala.Layout.PatternLayout
+log4vala.appender.LOGFILE.layout.pattern=%d{%Y-%m-%d %H:%M:%S} %5p %c : %m
 ```
 
 ### Programmatically
