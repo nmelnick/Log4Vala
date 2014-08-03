@@ -284,6 +284,7 @@ namespace Log4Vala {
 			set_defaults();
 			Type f = typeof(ScreenAppender);
 			f = typeof(FileAppender);
+			f = typeof(SocketAppender);
 			f = typeof(DescriptiveLayout);
 			f = typeof(PatternLayout);
 			f = typeof(SimpleLayout);

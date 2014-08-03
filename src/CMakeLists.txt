@@ -8,8 +8,9 @@ vala_precompile(LOG4VALA_VALA_C
 	Logger.vala
 	LoggerConfig.vala
 	Appender/IAppender.vala
-	Appender/ScreenAppender.vala
 	Appender/FileAppender.vala
+	Appender/ScreenAppender.vala
+	Appender/SocketAppender.vala
 	Layout/ILayout.vala
 	Layout/DescriptiveLayout.vala
 	Layout/PatternLayout.vala
