@@ -142,5 +142,71 @@ namespace Log4Vala {
 			}
 		}
 
+		/**
+		 * Log asynchronously, if in a runloop or event loop.
+		 *
+		 * For example, log_async.begin( LogLevel.DEBUG, "Test Message" );
+		 * @param log_level Level to log at
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void log_async( Level log_level, string message, Error? e = null ) {
+			log( log_level, message, e );
+		}
+
+		/**
+		 * Log a trace message via log(), asynchronously.
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void trace_async( string message, Error? e = null ) {
+			log( Level.TRACE, message, e );
+		}
+
+		/**
+		 * Log a debug message via log(), asynchronously.
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void debug_async( string message, Error? e = null ) {
+			log( Level.DEBUG, message, e );
+		}
+
+		/**
+		 * Log an info message via log(), asynchronously.
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void info_async( string message, Error? e = null ) {
+			log( Level.INFO, message, e );
+		}
+
+		/**
+		 * Log a warning message via log(), asynchronously.
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void warn_async( string message, Error? e = null ) {
+			log( Level.WARN, message, e );
+		}
+
+		/**
+		 * Log an error message via log(), asynchronously.
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void error_async( string message, Error? e = null ) {
+			log( Level.ERROR, message, e );
+		}
+
+		/**
+		 * Log a fatal message via log(), asynchronously.
+		 * @param message Message to log
+		 * @param e Optional Error object to log
+		 */
+		public async void fatal_async( string message, Error? e = null ) {
+			log( Level.FATAL, message, e );
+		}
+
 	}
 }

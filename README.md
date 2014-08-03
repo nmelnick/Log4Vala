@@ -67,6 +67,17 @@ public void a_method() {
 }
 ```
 
+You may also use async methods if you're in a run loop or event loop -- just
+append _async to the end of your logging call.
+
+```
+public void a_method() {
+	logger.info_async.begin("I am in a method!");
+
+	// You may also call "log" with a log level.
+	logger.log_async.begin( Log4Vala.Level.INFO, "I am in a method!" );
+}
+
 The Log4Vala in front of each call can be skipped with a ```using Log4Vala;``` at
 the beginning of your vala file.
 
