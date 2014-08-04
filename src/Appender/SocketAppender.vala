@@ -51,7 +51,7 @@ namespace Log4Vala.Appender {
 				try {
 					// Connect
 					var client = new SocketClient();
-					if ( protocol == "udp" ) {
+					if ( protocol.down() == "udp" ) {
 						client.protocol = SocketProtocol.UDP;
 						client.type = SocketType.DATAGRAM;
 					}
