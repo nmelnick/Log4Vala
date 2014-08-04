@@ -31,7 +31,7 @@ namespace Log4Vala.Appender {
 		public void append( LogEvent event ) {
 			try {
 				get_connection().output_stream.write( "%s\n".printf( this.layout.format(event) ).data );
-			} catch (ConnectionError e) {
+			} catch (Error e) {
 				stderr.printf( "ERROR: %s\n", e.message );
 			}
 		}
