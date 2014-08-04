@@ -27,10 +27,6 @@ namespace Log4Vala.Appender {
 		 * Protocol can be "tcp" or "udp", and defaults to tcp.
 		 */
 		public string protocol { get; set; default = "tcp"; }
-		/**
-		 * Set always_flush to 1 to flush after every write.
-		 */
-		public string always_flush { get; set; default = "0"; }
 
 		public void append( LogEvent event ) {
 			try {
@@ -55,6 +51,10 @@ namespace Log4Vala.Appender {
 				try {
 					// Connect
 					var client = new SocketClient();
+					if ( protocol == "udp" ) {
+						client.protocol = SocketProtocol.UDP;
+						client.type = SocketType.DATAGRAM;
+					}
 					conn = client.connect( new InetSocketAddress( address, (uint16) int.parse(port) ) );
 				} catch (Error e) {
 					throw new ConnectionError.CANNOT_CONNECT( e.message );

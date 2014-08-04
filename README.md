@@ -98,6 +98,8 @@ and appenders are included with Log4Vala, and you can also create your own.
 to use STDOUT or STDERR for you to appropriate capture the output.
 * *FileAppender* will output log messages to the given file, and either append
 or overwrite that file.
+* *SocketAppender* will output log messages to a socket listening at another
+host and port.
 
 ### Layouts
 
