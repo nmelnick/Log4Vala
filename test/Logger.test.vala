@@ -2,6 +2,8 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 	public Logger() {
 		base("Logger");
 		add_test( "get_logger.instance", get_logger_instance );
+		add_test( "get_logger.for_object_instance", get_logger_for_object_instance );
+		add_test( "get_logger.for_object_instance.without_translation", get_logger_for_object_instance_without_translation );
 		add_test( "get_logger.same.instance", get_logger_same_instance );
 		add_test( "log", do_log );
 	}
@@ -20,6 +22,28 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 		assert( logger != null );
 		assert( logger_two != null );
 		assert( logger == logger_two );
+	}
+
+	public void get_logger_for_object_instance() {
+		var logger = Log4Vala.Logger.get_logger_for_object( new TestAppender() );
+		assert( logger != null );
+		assert( logger.name == "Test.Appender" );
+
+		logger = Log4Vala.Logger.get_logger_for_object(this);
+		assert( logger != null );
+		assert( logger.name == "Log4.Vala.Test.Logger" );
+	}
+
+	public void get_logger_for_object_instance_without_translation() {
+		Log4Vala.Config.get_config().translate_type_name = false;
+		var logger = Log4Vala.Logger.get_logger_for_object( new TestAppender() );
+		assert( logger != null );
+		assert( logger.name == "TestAppender" );
+
+		logger = Log4Vala.Logger.get_logger_for_object(this);
+		assert( logger != null );
+		assert( logger.name == "Log4ValaTestLogger" );
+		Log4Vala.Config.get_config().translate_type_name = true;
 	}
 
 	public void do_log() {

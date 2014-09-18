@@ -56,6 +56,24 @@ namespace Log4Vala {
 			return logger_cache.lookup(name);
 		}
 
+		/**
+		 * Retrieve a Logger instance corresponding to the name of the current
+		 * object class. This infers a class name from a Type name using capital
+		 * letters, and may not necessarily the namespace and class name one
+		 * would expect.
+		 * @param object Object instance
+		 */
+		public static Logger get_logger_for_object( Object object ) {
+			string name;
+			if ( Config.get_config().translate_type_name ) {
+				var regex = /(.)([A-Z])/;
+				name = regex.replace( object.get_type().name(), -1, 0, "\\1.\\2" );
+			} else {
+				name = object.get_type().name();
+			}
+			return get_logger(name);
+		}
+
 		internal Logger() {}
 
 		internal Logger.with_name( string name ) {

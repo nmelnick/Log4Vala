@@ -28,6 +28,12 @@ namespace Log4Vala {
 		public string config_file { get; set; }
 
 		/**
+		 * Translate Type name to a guessed class name when getting a logger by
+		 * object.
+		 */
+		public bool translate_type_name { get; set; default = true; }
+
+		/**
 		 * Retrieve singleton instance of Config.
 		 */
 		public static Config get_config() {
