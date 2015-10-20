@@ -64,10 +64,15 @@ namespace Log4Vala {
 		 * @param object Object instance
 		 */
 		public static Logger get_logger_for_object( Object object ) {
-			string name;
+			string name = "";
 			if ( Config.get_config().translate_type_name ) {
 				var regex = /(.)([A-Z])/;
-				name = regex.replace( object.get_type().name(), -1, 0, "\\1.\\2" );
+				try {
+					name = regex.replace( object.get_type().name(), -1, 0, "\\1.\\2" );
+				} catch (RegexError e) {
+					stderr.printf( "Falling back to type name due to Regex issue: %s\n", e.message );
+					name = object.get_type().name();
+				}
 			} else {
 				name = object.get_type().name();
 			}
