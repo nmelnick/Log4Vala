@@ -6,6 +6,7 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 		add_test( "get_logger.for_object_instance.without_translation", get_logger_for_object_instance_without_translation );
 		add_test( "get_logger.same.instance", get_logger_same_instance );
 		add_test( "log", do_log );
+		add_test( "log_format", do_log_format );
 	}
 
 	public void get_logger_instance() {
@@ -66,6 +67,19 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 		logger.fatal("fatal");
 		assert( "FATAL" in appender.last_entry );
 		assert( "fatal" in appender.last_entry );
+	}
+
+	public void do_log_format() {
+		var appender = new TestAppender();
+		Log4Vala.Config.get_config().appenders.insert( "test.appender", appender );
+		Log4Vala.Config.get_config().loggers.insert( "test.class", new Log4Vala.LoggerConfig( {"test.appender"}, Log4Vala.Level.WARN ) );
+		var logger = Log4Vala.Logger.get_logger("test.class");
+		logger.error_format("error %d is %s", 51, "great");
+		assert( "ERROR" in appender.last_entry );
+		assert( "error 51 is great" in appender.last_entry );
+		logger.warn_format("warn %d is not %s", 22, "great");
+		assert( "WARN" in appender.last_entry );
+		assert( "warn 22 is not great" in appender.last_entry );
 	}
 }
 

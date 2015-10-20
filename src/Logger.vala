@@ -90,12 +90,30 @@ namespace Log4Vala {
 		}
 
 		/**
+		 * Log a trace message, with formatting, via log().
+		 * @param message Message to log
+		 */
+		public void trace_format( string message, ...  ) {
+			var l = va_list();
+			log( Level.TRACE, message.vprintf(l) );
+		}
+
+		/**
 		 * Log a debug message via log().
 		 * @param message Message to log
 		 * @param e Optional Error object to log
 		 */
 		public void debug( string message, Error? e = null ) {
 			log( Level.DEBUG, message, e );
+		}
+
+		/**
+		 * Log a debug message, with formatting, via log().
+		 * @param message Message to lo
+		 */
+		public void debug_format( string message, ... ) {
+			var l = va_list();
+			log( Level.DEBUG, message.vprintf(l) );
 		}
 
 		/**
@@ -108,12 +126,30 @@ namespace Log4Vala {
 		}
 
 		/**
+		 * Log an info message, with formatting, via log().
+		 * @param message Message to log
+		 */
+		public void info_format( string message, ... ) {
+			var l = va_list();
+			log( Level.INFO, message.vprintf(l) );
+		}
+
+		/**
 		 * Log a warning message via log().
 		 * @param message Message to log
 		 * @param e Optional Error object to log
 		 */
 		public void warn( string message, Error? e = null ) {
 			log( Level.WARN, message, e );
+		}
+
+		/**
+		 * Log a warning message, with formatting, via log().
+		 * @param message Message to log
+		 */
+		public void warn_format( string message, ... ) {
+			var l = va_list();
+			log( Level.WARN, message.vprintf(l) );
 		}
 
 		/**
@@ -126,12 +162,30 @@ namespace Log4Vala {
 		}
 
 		/**
+		 * Log an error message, with formatting, via log().
+		 * @param message Message to log
+		 */
+		public void error_format( string message, ... ) {
+			var l = va_list();
+			log( Level.ERROR, message.vprintf(l) );
+		}
+
+		/**
 		 * Log a fatal message via log().
 		 * @param message Message to log
 		 * @param e Optional Error object to log
 		 */
 		public void fatal( string message, Error? e = null ) {
 			log( Level.FATAL, message, e );
+		}
+
+		/**
+		 * Log a fatal message, with formatting, via log().
+		 * @param message Message to log
+		 */
+		public void fatal_format( string message, ... ) {
+			var l = va_list();
+			log( Level.FATAL, message.vprintf(l) );
 		}
 
 		/**
