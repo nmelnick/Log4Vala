@@ -60,12 +60,12 @@ namespace Log4Vala.Layout {
 											pattern_dt.append( pattern[p].to_string() );
 											p++;
 										}
-										p++;
 									} else {
 										pattern_dt.append("%FT%TZ");
 									}
 									pattern_sb.append("s");
 									sb.append( pattern_sb.str.printf( event.timestamp.format( pattern_dt.str ) ) );
+									in_pattern = false;
 									break;
 								case 'm':
 									pattern_sb.append("s");
