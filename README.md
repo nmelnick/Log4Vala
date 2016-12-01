@@ -64,6 +64,9 @@ public void a_method() {
 	} catch (Error e) {
 		logger.error( "Error in throwable method!", e );
 	}
+
+	// Or, you can use the formatter method.
+	logger.errorf("Oh no, an error! Error: %s", e.message);
 }
 ```
 
