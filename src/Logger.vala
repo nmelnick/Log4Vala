@@ -21,11 +21,11 @@ namespace Log4Vala {
 	 * try {
 	 *     something_that_will_throw();
 	 * } catch (Error e) {
-	 *     logger.error( "Something threw!", e );
+	 *     logger.error( "Something was thrown!", e );
 	 * }
 	 * }}}
 	 */
-	public class Logger : Object {
+	public class Logger : Object, LoggerCompat {
 		internal static HashTable<string,Logger?> logger_cache;
 
 		/**
@@ -98,7 +98,7 @@ namespace Log4Vala {
 		 * Log a trace message, with formatting, via log().
 		 * @param message Message to log
 		 */
-		public void trace_format( string message, ...  ) {
+		public void tracef( string message, ...  ) {
 			var l = va_list();
 			log( Level.TRACE, message.vprintf(l) );
 		}
@@ -116,7 +116,7 @@ namespace Log4Vala {
 		 * Log a debug message, with formatting, via log().
 		 * @param message Message to lo
 		 */
-		public void debug_format( string message, ... ) {
+		public void debugf( string message, ... ) {
 			var l = va_list();
 			log( Level.DEBUG, message.vprintf(l) );
 		}
@@ -134,7 +134,7 @@ namespace Log4Vala {
 		 * Log an info message, with formatting, via log().
 		 * @param message Message to log
 		 */
-		public void info_format( string message, ... ) {
+		public void infof( string message, ... ) {
 			var l = va_list();
 			log( Level.INFO, message.vprintf(l) );
 		}
@@ -152,7 +152,7 @@ namespace Log4Vala {
 		 * Log a warning message, with formatting, via log().
 		 * @param message Message to log
 		 */
-		public void warn_format( string message, ... ) {
+		public void warnf( string message, ... ) {
 			var l = va_list();
 			log( Level.WARN, message.vprintf(l) );
 		}
@@ -170,7 +170,7 @@ namespace Log4Vala {
 		 * Log an error message, with formatting, via log().
 		 * @param message Message to log
 		 */
-		public void error_format( string message, ... ) {
+		public void errorf( string message, ... ) {
 			var l = va_list();
 			log( Level.ERROR, message.vprintf(l) );
 		}
@@ -188,7 +188,7 @@ namespace Log4Vala {
 		 * Log a fatal message, with formatting, via log().
 		 * @param message Message to log
 		 */
-		public void fatal_format( string message, ... ) {
+		public void fatalf( string message, ... ) {
 			var l = va_list();
 			log( Level.FATAL, message.vprintf(l) );
 		}

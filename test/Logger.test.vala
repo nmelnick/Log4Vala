@@ -7,6 +7,7 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 		add_test( "get_logger.same.instance", get_logger_same_instance );
 		add_test( "log", do_log );
 		add_test( "log_format", do_log_format );
+		add_test( "legacy_log_format", do_legacy_log_format );
 	}
 
 	public void get_logger_instance() {
@@ -70,6 +71,19 @@ public class Log4ValaTest.Logger : AbstractTestCase {
 	}
 
 	public void do_log_format() {
+		var appender = new TestAppender();
+		Log4Vala.Config.get_config().appenders.insert( "test.appender", appender );
+		Log4Vala.Config.get_config().loggers.insert( "test.class", new Log4Vala.LoggerConfig( {"test.appender"}, Log4Vala.Level.WARN ) );
+		var logger = Log4Vala.Logger.get_logger("test.class");
+		logger.errorf("error %d is %s", 51, "great");
+		assert( "ERROR" in appender.last_entry );
+		assert( "error 51 is great" in appender.last_entry );
+		logger.warnf("warn %d is not %s", 22, "great");
+		assert( "WARN" in appender.last_entry );
+		assert( "warn 22 is not great" in appender.last_entry );
+	}
+
+	public void do_legacy_log_format() {
 		var appender = new TestAppender();
 		Log4Vala.Config.get_config().appenders.insert( "test.appender", appender );
 		Log4Vala.Config.get_config().loggers.insert( "test.class", new Log4Vala.LoggerConfig( {"test.appender"}, Log4Vala.Level.WARN ) );
