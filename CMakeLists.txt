@@ -19,7 +19,7 @@ SET(LIB_INSTALL_DIR lib)
 ENDIF()
 
 set (PKGNAME log4vala)
-set (PKGVERSION 0.1)
+set (PKGVERSION 0.2)
 set (PREFIX ${CMAKE_INSTALL_PREFIX})
 set (DOLLAR "$")
 

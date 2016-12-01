@@ -1,4 +1,4 @@
-# Log4Vala 0.1
+# Log4Vala 0.2
 
 Log4Vala is a logging framework for Vala (or other GLib/GObject projects),
 heavily inspired by the syntax and architecture of Log4J and similar projects.

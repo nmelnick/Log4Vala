@@ -6,6 +6,7 @@ vala_precompile(LOG4VALA_VALA_C
 	Level.vala
 	LogEvent.vala
 	Logger.vala
+	LoggerCompat.vala
 	LoggerConfig.vala
 	Appender/IAppender.vala
 	Appender/FileAppender.vala
