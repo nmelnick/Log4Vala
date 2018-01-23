@@ -10,12 +10,17 @@ before_install:
   - sudo add-apt-repository ppa:vala-team/ppa -y
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential cmake libglib2.0-dev libgee-0.8
-         valac-0.22
+         valac python3-pip
+  - pip3 install --user meson
+  - mkdir -p $HOME/bin
+  - curl -L https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip -o ninja-linux.zip
+  - unzip ninja-linux.zip -d $HOME/bin
+  - chmod a+x $HOME/bin/ninja
+  - export PATH=$PATH:$HOME/bin
 
 before_script:
-  - mkdir build
-  - cd build
-  - cmake ..
+  - PATH=$PATH:$HOME/bin meson builddir
+  - cd builddir
 
-script: make && cd test && ./test-log4vala
+script: ninja && test/log4vala-test
 

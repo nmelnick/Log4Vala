@@ -7,16 +7,15 @@ application or library.
 
 ## Installation
 
-To install the project from the Git repository, you will need Vala 0.18 or
-higher, and CMake. Check out the repository, enter the repository directory,
-and enter the following:
+To install the project from the Git repository, you will need Vala 0.26 or
+higher, and the Meson build system. Check out the repository, enter the
+repository directory, and enter the following:
 
 ```
-mkdir build
-cd build
-cmake ..
-make -j2
-sudo make install
+meson builddir
+cd builddir
+ninja
+sudo ninja install
 ```
 
 ## Basic Usage
@@ -85,7 +84,7 @@ public void a_method() {
 The Log4Vala in front of each call can be skipped with a ```using Log4Vala;``` at
 the beginning of your vala file.
 
-When you're ready to compile, add ```--pkg log4vala-0.1 -X -llog4vala-0.1``` to
+When you're ready to compile, add ```--pkg log4vala-0.2``` to
 your valac compile command.
 
 ## Appenders and Layouts
@@ -114,7 +113,7 @@ WARN - This is a message!
 * *DescriptiveLayout* includes most of the information one would need in a log,
 and looks like this:
 ```
-2014-01-01 15:31:48 WARN  example.class.foo This is a message!
+2018-01-01 15:31:48 WARN  example.class.foo This is a message!
 ```
 * *PatternLayout* is a configurable layout, that allows one to set up an output
 pattern, similar to a printf, and each log message will output that way. The options are as follows:
@@ -123,7 +122,7 @@ pattern, similar to a printf, and each log message will output that way. The opt
  |--------|---------------|
  | %%     | A percent sign |
  | %c     | The category or logger name |
- | %d     | The date. The date format character may be followed by a date format specifier enclosed between braces. For example, %d{%H:%M:%S,%l}. If no date format specifier is given, then the following format is used: "2014-06-18T09:56:21Z". The date format specifier admits the same syntax as the ANSI C function strftime, with 1 addition. The addition is the specifier %l for milliseconds, padded with zeros to make 3 digits. |
+ | %d     | The date. The date format character may be followed by a date format specifier enclosed between braces. For example, %d{%H:%M:%S,%l}. If no date format specifier is given, then the following format is used: "2018-06-18T09:56:21Z". The date format specifier admits the same syntax as the ANSI C function strftime, with 1 addition. The addition is the specifier %l for milliseconds, padded with zeros to make 3 digits. |
  | %m     | The message |
  | %n     | A line feed |
  | %p     | The priority or log level |
@@ -171,7 +170,7 @@ The order of loggers and appenders does not
 matter, but a logger or appender must be named before they can be configured.
 
 This example will set the default logger to a file at "/tmp/example.log", using
-a format similar to ```[2014-01-01 15:01:38] WARN  test.class : A message```,
+a format similar to ```[2018-01-01 15:01:38] WARN  test.class : A message```,
 but only at ERROR or above.
 
 ```
