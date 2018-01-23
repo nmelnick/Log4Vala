@@ -1,4 +1,4 @@
-test_name = library_name + '-test'
+test_name = meson.project_name() + '-test'
 
 test_sources = files([
 	'AbstractTestCase.vala',

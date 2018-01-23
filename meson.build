@@ -8,9 +8,9 @@ if vala.version().version_compare('<0.26')
     error('Requires Vala >= 0.26')
 endif
 
-version_split = meson.project_version.split('.')
-api_version = '.'.join([version_array[0], version_array[1]])
-library_name = meson.project_name() + '-' + version_split
+version_split = meson.project_version().split('.')
+api_version = '.'.join([version_split[0], version_split[1]])
+library_name = meson.project_name() + '-' + api_version
 
 deps = [
     dependency('gobject-2.0'),
