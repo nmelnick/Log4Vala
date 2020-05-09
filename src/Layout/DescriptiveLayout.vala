@@ -28,7 +28,7 @@ namespace Log4Vala.Layout {
 	 * }}}
 	 */
 	public class DescriptiveLayout : Object,ILayout {
-		public static const string error_format = " | Error: Code %d, Domain %" + uint32.FORMAT + ", Message: %s";
+		public const string error_format = " | Error: Code %d, Domain %" + uint32.FORMAT + ", Message: %s";
 		public string header { get; set; }
 		public string footer { get; set; }
 		public string format( LogEvent event ) {

@@ -20,7 +20,7 @@
 
 namespace Log4Vala {
 	public class LoggerConfig {
-		private static const string[] levels = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL" };
+		private const string[] levels = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL" };
 		public string[] appenders;
 		public Level? level;
 

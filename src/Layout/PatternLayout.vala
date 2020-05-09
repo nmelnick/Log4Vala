@@ -29,11 +29,11 @@ namespace Log4Vala.Layout {
 		/**
 		 * Pattern to match the SimpleLayout.
 		 */
-		public static const string SIMPLE_PATTERN = "%p - %m";
+		public const string SIMPLE_PATTERN = "%p - %m";
 		/**
 		 * Pattern to match the DescriptiveLayout.
 		 */
-		public static const string DESCRIPTIVE_PATTERN = "%d{%Y-%m-%d %H:%M:%S} %5p %c %m %E{ | Error: Code %Ec, Domain %Ed, Message: %Em}";
+		public const string DESCRIPTIVE_PATTERN = "%d{%Y-%m-%d %H:%M:%S} %5p %c %m %E{ | Error: Code %Ec, Domain %Ed, Message: %Em}";
 
 		public string header { get; set; }
 		public string footer { get; set; }
