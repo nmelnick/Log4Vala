@@ -12,7 +12,7 @@ higher, and the Meson build system. Check out the repository, enter the
 repository directory, and enter the following:
 
 ```
-meson builddir
+meson --prefix=/usr builddir
 cd builddir
 ninja
 sudo ninja install
